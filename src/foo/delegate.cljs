@@ -5,4 +5,4 @@
 
 (println "hello from delegate!")
 
-(defn foobar [] (println "FOOBAR"))
+(defn foobar [page] (println "FOOBAR, you " page "!"))

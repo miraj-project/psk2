@@ -1,5 +1,7 @@
 # WARNING: temporary repo, just for experimenting with ES6 classes and Clojurescript.  Will go away when (if?) I ever figure it out...
 
+To experiment:  https://www.polymer-project.org/2.0/docs/tools/polymer-cli[install polymer cli], clone it, and run `$ polymer serve --open`
+
 # Polymer App Toolbox - Starter Kit
 
 [![Build Status](https://travis-ci.org/PolymerElements/polymer-starter-kit.svg?branch=master)](https://travis-ci.org/PolymerElements/polymer-starter-kit)

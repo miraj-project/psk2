@@ -110,13 +110,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </app-drawer-layout>
   </template>
 
-  <script type="text/javascript" src="/out/goog/base.js"></script>
-  <script src="/out/main.js"></script>
-  <script>
-    function bar(page) { console.log("foo"); }
+  <!-- NOTE: this will not quite work, due to the way cljs generates
+       files.  to make it work we have two choices: -->
+  <!-- 1. put the following three script tags in the <head> of -->
+  <!-- index.html, before the <link> tag that loads this file, or -->
+  <!-- 2. put all of the following script tags at the bottom of <body> in index.html -->
+
+  <script type="text/javascript" src="../out/goog/base.js"></script>
+  <script src="../out/main.js"></script>
+  <script type="text/javascript">
+    goog.require("foo.delegate");
   </script>
 
   <script>
+    <!-- just for testing -->
+    function bar(page) { console.log("bar"); }
+  </script>
+
+  <!-- <script type="text/javascript" src="/out/goog/base.js"></script> -->
+  <!-- <script src="/out/main.js"></script> -->
+
+  <script>
+    <!-- goog.require("foo.delegate"); -->
+    console.log("oh, my achin' app!");
+
     class MyApp extends Polymer.Element {
 
       static get is() { return 'my-app'; }
@@ -182,7 +199,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     <!-- MyApp.prototype._pageFoo = bar; -->
-    MyApp.prototype._pageFoo = my_app.delegate.foobar;
+    MyApp.prototype._pageFoo = foo.delegate.foobar;
+    <!-- MyApp.prototype._pageFoo = foobar; -->
 
     window.customElements.define(MyApp.is, MyApp);
   </script>

@@ -1,5 +1,4 @@
-# WARNING: temporary repo, just for experimenting with ES6 classes and
-  Clojurescript.  Will go away when (if?) I ever figure it out...
+# WARNING: temporary repo, just for experimenting with ES6 classes and Clojurescript.  Will go away when (if?) I ever figure it out...
 
 # Polymer App Toolbox - Starter Kit
 

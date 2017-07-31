@@ -69,7 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
     <!-- Load your application shell -->
-    <link rel="import" href="src/my-app.html">
+    <link rel="import" href="src/shell/my-app.html">
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
@@ -90,5 +90,99 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </noscript>
     <!-- Built with love using Polymer Starter Kit -->
 
+  <!-- <script type="text/javascript" src="/out/goog/base.js"></script> -->
+  <script src="out/main.js"></script>
+  <!-- <script type="text/javascript"> -->
+  <!--   goog.require("shell.my_app"); -->
+  <!-- </script> -->
+
+  <script>
+    <!-- just for testing -->
+    function bar(page) { console.log("bar"); }
+  </script>
+
+  <script>
+    console.log("oh, my achin' app!");
+
+    class MyApp extends Polymer.Element {
+
+      static get is() { return 'my-app'; }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            <!-- observer: '_pageChanged', -->
+	    observer: '_pageChanged',
+          },
+          rootPattern: String,
+          routeData: Object,
+          subroute: String,
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+        ];
+      }
+
+      constructor() {
+        super();
+	shell.my_app._constructor(this);
+      }
+
+      connectedCallback() {
+      	super.connectedCallback();
+	shell.my_app._connectedCallback(this);
+      }
+
+      disconnectedCallback() {
+      	super.disconnectedCallback();
+        shell.my_app._disconnectedCallback(this);
+	}
+
+      <!-- _routePageChanged(page) { -->
+      <!--   // Polymer 2.0 will call with `undefined` on initialization. -->
+      <!--   // Ignore until we are properly called with a string. -->
+      <!--   if (page === undefined) { -->
+      <!--     return; -->
+      <!--   } -->
+
+      <!--   // If no page was found in the route data, page will be an empty string. -->
+      <!--   // Deault to 'view1' in that case. -->
+      <!--   this.page = page || 'view1'; -->
+
+      <!--   // Close a non-persistent drawer when the page & route are changed. -->
+      <!--   if (!this.$.drawer.persistent) { -->
+      <!--     this.$.drawer.close(); -->
+      <!--   } -->
+      <!-- } -->
+
+    <!-- _pageChanged(page) { -->
+    <!--     // Load page import on demand. Show 404 page if fails -->
+    <!--     var resolvedPageUrl = this.resolveUrl('my-' + page + '.html'); -->
+    <!--     Polymer.importHref( -->
+    <!--         resolvedPageUrl, -->
+    <!--         null, -->
+    <!--         this._showPage404.bind(this), -->
+    <!--         true); -->
+    <!-- } -->
+
+      <!-- _showPage404() { -->
+      <!--   this.page = 'view404'; -->
+      <!-- } -->
+
+    }
+
+    MyApp.prototype._routePageChanged = shell.my_app._route_page_changed;
+
+    MyApp.prototype._pageChanged = shell.my_app._page_changed;
+
+    <!-- MyApp.prototype._showPage404 = shell.my_app._show_page_404; -->
+
+    window.customElements.define(MyApp.is, MyApp);
+  </script>
   </body>
 </html>

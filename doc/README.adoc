@@ -1,0 +1,5 @@
+= docs
+
+ES6 class implemented in clojurescript:
+
+https://gist.github.com/thheller/36332574918b974a3e4996efcb7457d2

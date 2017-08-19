@@ -5,17 +5,17 @@
 
 (println "hello from shell.my-app!")
 
-(defn -constructor [this]
+(defn ^:export -constructor [this]
   ;; Get root pattern for app-route, for more info about `rootPath` see:
   ;; https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
   (let [rp (.-pathname (js/URL. (goog.object/get this "rootPath")))]
     (goog.object/set this "rootPattern" rp)))
 
-(defn -connectedCallback
+(defn ^:export -connectedCallback
   [this]
   (println "Connected callback on " this))
 
-(defn -disconnectedCallback
+(defn ^:export -disconnectedCallback
   [this]
   (println "disonnected callback " this))
 
@@ -24,12 +24,14 @@
   (println "Showing 404")
   (this-as this (goog.object/set this "page" "view404")))
 
-(defn -page-changed [newpg oldpg]
+(defn ^:export -page-changed [newpg oldpg]
   ;; Load page import on demand. Show 404 page if fails
   ;; importHref doc: https://www.polymer-project.org/2.0/docs/api/
   (this-as this
     (println "Page changed from: " oldpg " to " newpg)
+      (println "This: " this)
     (let [new-url (.resolveUrl this (str "../my-" newpg ".html"))]
+      (println "This: " this)
       ;; go thru the instance, using 'bind':
       ;; (.importHref js/Polymer new-url nil
       ;;              (.bind (goog.object/get this "_showPage404") this)
@@ -41,7 +43,7 @@
                    true)))
   )
 
-(defn -route-page-changed
+(defn ^:export -route-page-changed
   [page]
   ;; Polymer 2.0 will call with `undefined` on initialization.
   ;; Ignore until we are properly called with a string.
